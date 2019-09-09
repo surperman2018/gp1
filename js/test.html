@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<head>
+    <title>仿淘宝网左侧的商品分类菜单代码</title>
+</head>
+
+<body>
+    <style>
+        html {
+            color: #000;
+            background: #FFF
+        }
+
+        body,
+        div,
+        dl,
+        dt,
+        dd,
+        ul,
+        ol,
+        li,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        pre,
+        code,
+        form,
+        fieldset,
+        legend,
+        input,
+        button,
+        textarea,
+        select,
+        p,
+        blockquote,
+        th,
+        td {
+            margin: 0;
+            padding: 0
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        fieldset,
+        img {
+            border: 0
+        }
+
+        address,
+        button,
+        caption,
+        cite,
+        code,
+        dfn,
+        em,
+        input,
+        optgroup,
+        option,
+        select,
+        strong,
+        textarea,
+        th,
+        var {
+            font: inherit
+        }
+
+        del,
+        ins {
+            text-decoration: none
+        }
+
+        li {
+            list-style: none
+        }
+
+        caption,
+        th {
+            text-align: left
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 100%;
+            font-weight: normal
+        }
+
+        q:before,
+        q:after {
+            content: ''
+        }
+
+        abbr,
+        acronym {
+            border: 0;
+            font-variant: normal
+        }
+
+        sup {
+            vertical-align: baseline
+        }
+
+        sub {
+            vertical-align: baseline
+        }
+
+        legend {
+            color: #000
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .sub-col {
+            position: relative;
+            z-index: 999;
+        }
+
+        .category {
+            width: 230px;
+            border: 1px solid #8A0E00;
+        }
+
+        .category h3 {
+            height: 30px;
+            line-height: 30px;
+            text-indent: 15px;
+            background: #A91319;
+            color: #fff;
+        }
+
+        .category ul li {
+            height: 30px;
+            line-height: 30px;
+            text-indent: 35px;
+            background: #FFF8F6 url(arrow-r.png) no-repeat 205px center;
+            border-bottom: 1px solid #ECECEC;
+            border-top: 1px solid #fff;
+            cursor: pointer;
+            color: #A71F37;
+        }
+
+        .category ul li:hover {
+            background-color: #8A0E00;
+            color: #fff;
+        }
+
+        .pop-category {
+            border: 2px solid #8A0E00;
+            background: #FDF5F5;
+            position: absolute;
+            left: 200px;
+            top: 40px;
+            z-index: 1000;
+        }
+
+        .pop-category .sub-item {
+            width: 390px;
+            height: 350px;
+        }
+    </style>
+    <div class="wrapper">
+        <div class='sub-col'>
+            <div class="category">
+                <h3>所有商品分类</h3>
+                <ul id="J_category" class="item">
+                    <li>潮流服饰</li>
+                    <li>精品鞋包</li>
+                    <li>美容护肤</li>
+                    <li>珠宝饰品</li>
+                    <li>运动户外</li>
+                    <li>手机数码</li>
+                    <li>居家生活</li>
+                    <li>家电家装</li>
+                    <li>母婴用品</li>
+                    <li>食品保健</li>
+                </ul>
+                <div id="J_popCategory" class="pop-category hidden">
+                    <div class='sub-item' style='display:none;'>潮流服饰</div>
+                    <div class='sub-item' style='display:none;'>精品鞋包</div>
+                    <div class='sub-item' style='display:none;'>美容护肤</div>
+                    <div class='sub-item' style='display:none;'>珠宝饰品</div>
+                    <div class='sub-item' style='display:none;'>运动户外</div>
+                    <div class='sub-item' style='display:none;'>手机数码</div>
+                    <div class='sub-item' style='display:none;'>居家生活</div>
+                    <div class='sub-item' style='display:none;'>家电家装</div>
+                    <div class='sub-item' style='display:none;'>母婴用品</div>
+                    <div class='sub-item' style='display:none;'>食品保健</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //get element's id with '$(id)' method
+        function $() {
+            var elements = new Array();
+            for (var i = 0; i < arguments.length; i++) {
+                var element = arguments[i];
+                if (typeof element == 'string')
+                    element = document.getElementById(element);
+                if (arguments.length == 1)
+                    return element;
+                elements.push(element);
+            }
+            return elements;
+        }
+        //get ele's className
+        function getElementsByClassName(className, tagName) {
+            var ele = [], all = document.getElementsByTagName(tagName || '*');
+            for (var i = 0; i < all.length; i++) {
+                if (all[i].className == className) {
+                    ele[ele.length] = all[i];
+                }
+            }
+            return ele;
+        }
+    </script>
+    <script type='text/javascript'>
+        var category = $('J_category'), popCategory = $('J_popCategory'),
+            cateLi = category.getElementsByTagName('li'), subItems = getElementsByClassName('sub-item', 'div');
+        category.onmouseover = function () {
+            popCategory.style.display = 'block';
+        };
+        category.onmouseout = function () {
+            popCategory.style.display = 'none';
+        };
+        for (var i = 0; i < cateLi.length; i++) {
+            cateLi[i].index = i;
+            cateLi[i].onmouseover = function () {
+                for (var j = 0; j < subItems.length; j++) {
+                    subItems[j].style.display = 'none';
+                }
+                subItems[this.index].style.display = 'block';
+            };
+        }
+    </script>
+</body>
+
+</html>
